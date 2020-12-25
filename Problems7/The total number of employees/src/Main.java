@@ -12,10 +12,14 @@ class EmployeesCounter {
      * @return the number of employees
      */
     public static long calcNumberOfEmployees(List<Department> departments, long threshold) {
-        return 0; // write your code here
+         return departments.stream()
+                .filter(x -> x.getCode().startsWith("111-"))
+                .flatMap(x -> x.getEmployees().stream())
+                .filter(x -> x.getSalary() >= threshold)
+                .count();
     }
 
-    // Don't change the code below
+
     static class Employee {
         private final String name;
         private final Long salary;
