@@ -1,31 +1,43 @@
 class Move {
     public static void moveRobot(Robot robot, int toX, int toY) {
-
-
-        while(robot.getX() != toX || robot.getY() != toY){
-            if(toX > robot.getX()){
-                while(robot.getDirection() != Direction.RIGHT){robot.turnRight();}
-                while(robot.getX() != toX){robot.stepForward();}
+        int toMoveX = toX - robot.getX();
+        int toMoveY = toY - robot.getY();
+        if (toMoveX > 0) {
+            while (robot.getDirection() != Direction.RIGHT) {
+                robot.turnRight();
             }
-            if(toX < robot.getX()){
-                while(robot.getDirection() != Direction.LEFT){robot.turnLeft();}
-                while(robot.getX() != toX){robot.stepForward();}
+            do {
+                robot.stepForward();
+            } while (robot.getX() != toX);
+        } else if (toMoveX < 0) {
+            while (robot.getDirection() != Direction.LEFT) {
+                robot.turnLeft();
             }
-            if(toY > robot.getY()){
-                while(robot.getDirection() != Direction.UP){robot.turnRight();}
-                while(robot.getY() != toY){robot.stepForward();}
-            }
-            if(toY < robot.getY()){
-                while(robot.getDirection() != Direction.DOWN){robot.turnLeft();}
-                while(robot.getY() != toY){robot.stepForward();}
-            }
+            do {
+                robot.stepForward();
+            } while (robot.getX() != toX);
         }
 
-//        robot.stepForward(); // your implementation here
+        if (toMoveY > 0) {
+            while (robot.getDirection() != Direction.UP) {
+                robot.turnRight();
+            }
+            do {
+                robot.stepForward();
+            } while (robot.getY() != toY);
+        } else if (toMoveY < 0) {
+            while (robot.getDirection() != Direction.DOWN) {
+                robot.turnLeft();
+            }
+            do {
+                robot.stepForward();
+            } while (robot.getY() != toY);
+        }
+
     }
 }
 
-//Don't change code below
+
 
 enum Direction {
     UP(0, 1),
